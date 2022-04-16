@@ -1,6 +1,6 @@
 # from competition import Competition
-from identified_object import IdentifiedObject
-from exceptions import DuplicateOid
+from league_manager.identified_object import IdentifiedObject
+from league_manager.exceptions import DuplicateOid
 # from team import Team
 # from team_member import TeamMember
 

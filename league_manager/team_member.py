@@ -1,4 +1,4 @@
-from identified_object import IdentifiedObject
+from league_manager.identified_object import IdentifiedObject
 
 
 class TeamMember(IdentifiedObject):

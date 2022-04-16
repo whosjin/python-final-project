@@ -2,8 +2,8 @@ import csv
 import os.path
 import pickle
 
-from team import Team
-from team_member import TeamMember
+from league_manager.team import Team
+from league_manager.team_member import TeamMember
 
 
 class LeagueDatabase:
@@ -109,11 +109,12 @@ class LeagueDatabase:
 
 # if __name__ == '__main__':
 #     lg = League(1, "test1")
-#     # lg2 = League(2, "test2")
+#     lg2 = League(2, "test2")
 #
 #     # from league_database import LeagueDatabase
 #     db = LeagueDatabase.instance()
 #     db.add_league(lg)
+
 #     # db.save("test_file")
 #     #
 #     # db.add_league(lg2)

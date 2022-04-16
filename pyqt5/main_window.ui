@@ -47,14 +47,20 @@
          </spacer>
         </item>
         <item>
-         <widget class="QPushButton" name="push_btn_edit">
+         <widget class="QPushButton" name="btn_edit">
+          <property name="focusPolicy">
+           <enum>Qt::StrongFocus</enum>
+          </property>
           <property name="text">
            <string>&amp;Edit</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="push_btn_delete">
+         <widget class="QPushButton" name="btn_delete">
+          <property name="focusPolicy">
+           <enum>Qt::StrongFocus</enum>
+          </property>
           <property name="text">
            <string>&amp;Delete</string>
           </property>
@@ -299,12 +305,12 @@
          <string>League Name:</string>
         </property>
         <property name="buddy">
-         <cstring>line_edit_add_league</cstring>
+         <cstring>line_edit_league_name</cstring>
         </property>
        </widget>
       </item>
       <item row="0" column="1">
-       <widget class="QLineEdit" name="line_edit_add_league"/>
+       <widget class="QLineEdit" name="line_edit_league_name"/>
       </item>
       <item row="1" column="0" colspan="2">
        <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -322,7 +328,10 @@
          </spacer>
         </item>
         <item>
-         <widget class="QPushButton" name="push_btn_add">
+         <widget class="QPushButton" name="btn_add">
+          <property name="focusPolicy">
+           <enum>Qt::StrongFocus</enum>
+          </property>
           <property name="text">
            <string>   &amp;Add   </string>
           </property>
@@ -372,10 +381,10 @@
   </action>
  </widget>
  <tabstops>
-  <tabstop>line_edit_add_league</tabstop>
-  <tabstop>push_btn_add</tabstop>
-  <tabstop>push_btn_edit</tabstop>
-  <tabstop>push_btn_delete</tabstop>
+  <tabstop>line_edit_league_name</tabstop>
+  <tabstop>btn_add</tabstop>
+  <tabstop>btn_edit</tabstop>
+  <tabstop>btn_delete</tabstop>
   <tabstop>list_widget_leagues</tabstop>
  </tabstops>
  <resources/>
