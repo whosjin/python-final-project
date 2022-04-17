@@ -1,10 +1,11 @@
 import sys
 
 from PyQt5 import uic, QtWidgets
-from PyQt5.QtWidgets import QMessageBox
+from PyQt5.QtWidgets import QMessageBox, QDialog
 
 from league_manager.league_database import LeagueDatabase
 from league_manager.league import League
+from pyqt5.league_editor import LeagueEditor
 
 Ui_MainWindow, QTBaseWindow = uic.loadUiType("main_window.ui")
 
@@ -47,7 +48,19 @@ class MainWindow(Ui_MainWindow, QTBaseWindow):
         self.update_ui()
 
     def edit_btn_clicked(self):
-        pass
+        selected_row = self.list_widget_leagues.currentRow()
+
+        if selected_row == -1:
+            self.warn("No Selection", "No League Selected to Edit")
+            return
+
+        lg = self._db.leagues[selected_row]
+        editor = LeagueEditor(lg)
+
+        if editor.exec() == QDialog.DialogCode.Accepted:
+            print("save")
+        else:
+            print("cancel")
 
     def warn(self, title, message):
         error_msg = QMessageBox(QMessageBox.Icon.Critical, title, message, QMessageBox.StandardButton.Ok)
