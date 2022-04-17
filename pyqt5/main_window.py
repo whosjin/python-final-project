@@ -20,13 +20,13 @@ class MainWindow(Ui_MainWindow, QTBaseWindow):
 
     def add_btn_clicked(self):
         new_league_name = self.line_edit_league_name.text()
+
         if new_league_name:
             self._db.add_league(League(self._db.next_oid(), new_league_name))
-            self.list_widget_leagues.addItem(new_league_name)
         else:
             self.warn("No Input", "You must enter a valid League Name")
 
-        self.line_edit_league_name.clear()
+        self.update_ui()
 
     def delete_btn_clicked(self):
         pass
@@ -37,6 +37,13 @@ class MainWindow(Ui_MainWindow, QTBaseWindow):
     def warn(self, title, message):
         error_msg = QMessageBox(QMessageBox.Icon.Critical, title, message, QMessageBox.StandardButton.Ok)
         return error_msg.exec_()
+
+    def update_ui(self):
+        self.line_edit_league_name.clear()
+        self.list_widget_leagues.clear()
+
+        for lg in self._db.leagues:
+            self.list_widget_leagues.addItem(str(lg))
 
 
 if __name__ == '__main__':
