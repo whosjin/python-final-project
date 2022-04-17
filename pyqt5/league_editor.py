@@ -35,7 +35,21 @@ class LeagueEditor(Ui_MainWindow, QTBaseWindow):
         self.update_ui()
 
     def delete_btn_clicked(self):
-        pass
+        selected_row = self.list_widget_teams.currentRow()
+        dialog, btn_yes, btn_no = self._message.confirmation("Delete Team",
+                                                             "Are You Sure You Want to Delete Team ("
+                                                             + str(self._league.teams[selected_row]) + ")?")
+
+        if selected_row == -1:
+            self._message.warn("No Selection", "No Team Selected for Deletion")
+            return
+
+        dialog.exec()
+
+        if dialog.clickedButton() == btn_yes:
+            del self._league.teams[selected_row]
+
+        self.update_ui()
 
     def edit_btn_clicked(self):
         pass

@@ -34,9 +34,10 @@ class MainWindow(Ui_MainWindow, QTBaseWindow):
         self.update_ui()
 
     def delete_btn_clicked(self):
-        dialog, btn_yes, btn_no = self._message.confirmation("Delete League",
-                                                             "Are you sure you want to delete this league?")
         selected_row = self.list_widget_leagues.currentRow()
+        dialog, btn_yes, btn_no = self._message.confirmation("Delete Team",
+                                                             "Are You Sure You Want to Delete League ("
+                                                             + str(self._db.leagues[selected_row]) + ")?")
 
         if selected_row == -1:
             self._message.warn("No Selection", "No League Selected for Deletion")
