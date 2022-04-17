@@ -29,7 +29,21 @@ class MainWindow(Ui_MainWindow, QTBaseWindow):
         self.update_ui()
 
     def delete_btn_clicked(self):
-        pass
+        dialog = QMessageBox(QMessageBox.Icon.Question, "Delete League", "Are you sure you want to delete this league?")
+        btn_yes = dialog.addButton("Yes", QMessageBox.ButtonRole.YesRole)
+        dialog.addButton("No", QMessageBox.ButtonRole.NoRole)
+        selected_row = self.list_widget_leagues.currentRow()
+
+        if selected_row == -1:
+            self.warn("No Selection", "No League Selected for Deletion")
+            return
+
+        dialog.exec()
+
+        if dialog.clickedButton() == btn_yes:
+            del self._db.leagues[selected_row]
+
+        self.update_ui()
 
     def edit_btn_clicked(self):
         pass
