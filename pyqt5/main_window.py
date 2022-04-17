@@ -17,6 +17,7 @@ class MainWindow(Ui_MainWindow, QTBaseWindow):
         self.btn_delete.clicked.connect(self.delete_btn_clicked)
         self.btn_edit.clicked.connect(self.edit_btn_clicked)
         self._db = LeagueDatabase.instance()
+        self.update_ui()
 
     def add_btn_clicked(self):
         new_league_name = self.line_edit_league_name.text()
