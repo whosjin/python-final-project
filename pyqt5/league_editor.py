@@ -1,15 +1,17 @@
 import sys
 
 from PyQt5 import uic, QtWidgets
+from PyQt5.QtWidgets import QDialog
 
 from league_manager.team import Team
 from pyqt5.messages import Message
+from pyqt5.team_editor import TeamEditor
 
 Ui_MainWindow, QTBaseWindow = uic.loadUiType("league_editor.ui")
 
 
 class LeagueEditor(Ui_MainWindow, QTBaseWindow):
-    def __init__(self, league, db, parent=None):
+    def __init__(self, league=None, db=None, parent=None):
         super().__init__(parent)
         self.setupUi(self)
         self.btn_add.clicked.connect(self.add_btn_clicked)
@@ -52,7 +54,19 @@ class LeagueEditor(Ui_MainWindow, QTBaseWindow):
         self.update_ui()
 
     def edit_btn_clicked(self):
-        pass
+        selected_row = self.list_widget_teams.currentRow()
+
+        if selected_row == -1:
+            self._message.warn("No Selection", "No Team Selected to Edit")
+            return
+
+        team = self._league.teams[selected_row]
+        team_editor = TeamEditor(team, self._db)
+
+        if team_editor.exec() == QDialog.DialogCode.Accepted:
+            print("save")
+        else:
+            print("cancel")
 
     def update_ui(self):
         self.line_edit_team_name.clear()
