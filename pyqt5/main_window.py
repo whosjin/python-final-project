@@ -6,6 +6,7 @@ from PyQt5.QtWidgets import QMessageBox, QDialog
 from league_manager.league_database import LeagueDatabase
 from league_manager.league import League
 from pyqt5.league_editor import LeagueEditor
+from pyqt5.messages import Message
 
 Ui_MainWindow, QTBaseWindow = uic.loadUiType("main_window.ui")
 
@@ -18,26 +19,27 @@ class MainWindow(Ui_MainWindow, QTBaseWindow):
         self.btn_delete.clicked.connect(self.delete_btn_clicked)
         self.btn_edit.clicked.connect(self.edit_btn_clicked)
         self._db = LeagueDatabase.instance()
+        self._message = Message()
         self.update_ui()
 
     def add_btn_clicked(self):
         new_league_name = self.line_edit_league_name.text()
+        oid = self._db.next_oid()
 
         if new_league_name:
-            self._db.add_league(League(self._db.next_oid(), new_league_name))
+            self._db.add_league(League(oid, new_league_name))
         else:
-            self.warn("No Input", "You must enter a valid League Name")
+            self._message.warn("No Input", "You must enter a valid League Name")
 
         self.update_ui()
 
     def delete_btn_clicked(self):
-        dialog = QMessageBox(QMessageBox.Icon.Question, "Delete League", "Are you sure you want to delete this league?")
-        btn_yes = dialog.addButton("Yes", QMessageBox.ButtonRole.YesRole)
-        dialog.addButton("No", QMessageBox.ButtonRole.NoRole)
+        dialog, btn_yes, btn_no = self._message.confirmation("Delete League",
+                                                             "Are you sure you want to delete this league?")
         selected_row = self.list_widget_leagues.currentRow()
 
         if selected_row == -1:
-            self.warn("No Selection", "No League Selected for Deletion")
+            self._message.warn("No Selection", "No League Selected for Deletion")
             return
 
         dialog.exec()
@@ -51,20 +53,16 @@ class MainWindow(Ui_MainWindow, QTBaseWindow):
         selected_row = self.list_widget_leagues.currentRow()
 
         if selected_row == -1:
-            self.warn("No Selection", "No League Selected to Edit")
+            self._message.warn("No Selection", "No League Selected to Edit")
             return
 
         lg = self._db.leagues[selected_row]
-        editor = LeagueEditor(lg)
+        league_editor = LeagueEditor(lg, self._db)
 
-        if editor.exec() == QDialog.DialogCode.Accepted:
+        if league_editor.exec() == QDialog.DialogCode.Accepted:
             print("save")
         else:
             print("cancel")
-
-    def warn(self, title, message):
-        error_msg = QMessageBox(QMessageBox.Icon.Critical, title, message, QMessageBox.StandardButton.Ok)
-        return error_msg.exec_()
 
     def update_ui(self):
         self.line_edit_league_name.clear()
