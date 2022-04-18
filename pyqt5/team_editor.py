@@ -14,7 +14,7 @@ class TeamEditor(Ui_MainWindow, QTBaseWindow):
         self.setupUi(self)
         self.btn_add.clicked.connect(self.add_btn_clicked)
         self.btn_delete.clicked.connect(self.delete_btn_clicked)
-        # self.btn_edit.clicked.connect(self.edit_btn_clicked)
+        self.btn_update.clicked.connect(self.update_btn_clicked)
         self._message = Message()
         self._team = team
         self._db = db
@@ -47,6 +47,20 @@ class TeamEditor(Ui_MainWindow, QTBaseWindow):
         if dialog.clickedButton() == btn_yes:
             del self._team.members[selected_row]
             self.update_ui()
+
+    def update_btn_clicked(self):
+        selected_row = self.list_widget_members.currentRow()
+        if selected_row == -1:
+            self._message.warn("No Selection", "No Member Selected to Update")
+            return
+
+        selected_member = self._team.members[selected_row]
+
+        self.lbl_new_member.setText("Update " + selected_member.name)
+        self.line_edit_member_name.setText(selected_member.name)
+        self.line_edit_member_email.setText(selected_member.email)
+        self.btn_add.setText("Update")
+
 
     def update_ui(self):
         self.line_edit_member_name.clear()

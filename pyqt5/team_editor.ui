@@ -57,7 +57,7 @@
           <enum>Qt::StrongFocus</enum>
          </property>
          <property name="text">
-          <string>  &amp;Add  </string>
+          <string>   &amp;Add   </string>
          </property>
         </widget>
        </item>
@@ -124,12 +124,12 @@
         </spacer>
        </item>
        <item>
-        <widget class="QPushButton" name="btn_edit">
+        <widget class="QPushButton" name="btn_update">
          <property name="focusPolicy">
           <enum>Qt::StrongFocus</enum>
          </property>
          <property name="text">
-          <string>&amp;Edit</string>
+          <string>&amp;Update</string>
          </property>
         </widget>
        </item>
@@ -387,7 +387,7 @@
   <tabstop>line_edit_member_name</tabstop>
   <tabstop>line_edit_member_email</tabstop>
   <tabstop>btn_add</tabstop>
-  <tabstop>btn_edit</tabstop>
+  <tabstop>btn_update</tabstop>
   <tabstop>btn_delete</tabstop>
   <tabstop>list_widget_members</tabstop>
  </tabstops>
