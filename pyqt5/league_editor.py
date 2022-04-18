@@ -20,6 +20,7 @@ class LeagueEditor(Ui_MainWindow, QTBaseWindow):
         self._message = Message()
         self._league = league
         self._db = db
+        self.layout().setMenuBar()
         if self._league:
             self.lbl_teams.setText("Teams in " + league.name + ":")
             self.setWindowTitle("League (" + league.name + ") Editor")

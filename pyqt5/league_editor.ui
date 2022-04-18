@@ -66,6 +66,13 @@
     </layout>
    </item>
    <item>
+    <widget class="Line" name="line_2">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+   </item>
+   <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
       <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -78,6 +85,23 @@
        </item>
        <item>
         <widget class="QListWidget" name="list_widget_teams"/>
+       </item>
+       <item>
+        <widget class="QSplitter" name="splitter">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <widget class="QPushButton" name="btn_import">
+          <property name="text">
+           <string>Import League Teams</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="btn_export">
+          <property name="text">
+           <string>Export League Teams</string>
+          </property>
+         </widget>
+        </widget>
        </item>
       </layout>
      </item>
@@ -343,6 +367,13 @@
       </layout>
      </item>
     </layout>
+   </item>
+   <item>
+    <widget class="Line" name="line">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
    </item>
    <item>
     <widget class="QDialogButtonBox" name="buttonBox">
