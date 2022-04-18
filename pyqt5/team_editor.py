@@ -2,6 +2,7 @@ import sys
 
 from PyQt5 import uic, QtWidgets
 
+from league_manager.exceptions import DuplicateOid, DuplicateEmail
 from league_manager.team_member import TeamMember
 from pyqt5.messages import Message
 
@@ -31,8 +32,13 @@ class TeamEditor(Ui_MainWindow, QTBaseWindow):
         oid = self._db.next_oid()
 
         if new_member_name and new_member_email:
-            self._team.add_member(TeamMember(oid, new_member_name, new_member_email))
-            self.update_ui()
+            try:
+                self._team.add_member(TeamMember(oid, new_member_name, new_member_email))
+                self.update_ui()
+            except DuplicateOid:
+                self._message.warn("Issue Adding Member", "Member has Duplicate ID")
+            except DuplicateEmail:
+                self._message.warn("Issue Adding Member", "Member has Duplicate Email Address")
         else:
             self._message.warn("No Input", "You Must Enter a Valid Member Name and Email")
 

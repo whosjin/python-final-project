@@ -3,7 +3,7 @@ import sys
 from PyQt5 import uic, QtWidgets
 from PyQt5.QtWidgets import QDialog, QFileDialog
 
-from league_manager.exceptions import NoDataInFile
+from league_manager.exceptions import NoDataInFile, DuplicateOid
 from league_manager.team import Team
 from pyqt5.messages import Message
 from pyqt5.team_editor import TeamEditor
@@ -33,8 +33,11 @@ class LeagueEditor(Ui_MainWindow, QTBaseWindow):
         oid = self._db.next_oid()
 
         if new_team_name:
-            self._league.add_team(Team(oid, new_team_name))
-            self.update_ui()
+            try:
+                self._league.add_team(Team(oid, new_team_name))
+                self.update_ui()
+            except DuplicateOid:
+                self._message.warn("Issue Adding Team", "Team has Duplicate ID")
         else:
             self._message.warn("No Input", "You Must Enter a Valid Team Name")
 
