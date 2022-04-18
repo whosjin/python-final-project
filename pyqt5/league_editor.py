@@ -60,7 +60,7 @@ class LeagueEditor(Ui_MainWindow, QTBaseWindow):
         team_editor = TeamEditor(team, self._db)
 
         if team_editor.exec() == QDialog.DialogCode.Accepted:
-            print("save")
+            self.update_ui()
         else:
             print("cancel")
 

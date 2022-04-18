@@ -52,6 +52,13 @@
         </spacer>
        </item>
        <item>
+        <widget class="QPushButton" name="btn_confirm">
+         <property name="text">
+          <string>Confirm</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QPushButton" name="btn_add">
          <property name="focusPolicy">
           <enum>Qt::StrongFocus</enum>

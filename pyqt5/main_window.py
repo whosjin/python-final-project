@@ -57,7 +57,7 @@ class MainWindow(Ui_MainWindow, QTBaseWindow):
         league_editor = LeagueEditor(lg, self._db)
 
         if league_editor.exec() == QDialog.DialogCode.Accepted:
-            print("save")
+            self.update_ui()
         else:
             print("cancel")
 

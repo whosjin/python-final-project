@@ -15,6 +15,8 @@ class TeamEditor(Ui_MainWindow, QTBaseWindow):
         self.btn_add.clicked.connect(self.add_btn_clicked)
         self.btn_delete.clicked.connect(self.delete_btn_clicked)
         self.btn_update.clicked.connect(self.update_btn_clicked)
+        self.btn_confirm.setVisible(False)
+        self.btn_confirm.clicked.connect(self.confirm_btn_clicked)
         self._message = Message()
         self._team = team
         self._db = db
@@ -59,13 +61,23 @@ class TeamEditor(Ui_MainWindow, QTBaseWindow):
         self.lbl_new_member.setText("Update " + selected_member.name)
         self.line_edit_member_name.setText(selected_member.name)
         self.line_edit_member_email.setText(selected_member.email)
-        self.btn_add.setText("Update")
+        self.btn_add.setVisible(False)
+        self.btn_confirm.setVisible(True)
 
+    def confirm_btn_clicked(self):
+        selected_row = self.list_widget_members.currentRow()
+        selected_member = self._team.members[selected_row]
+        selected_member.name = self.line_edit_member_name.text()
+        selected_member.email = self.line_edit_member_email.text()
+        self.update_ui()
 
     def update_ui(self):
         self.line_edit_member_name.clear()
         self.line_edit_member_email.clear()
         self.list_widget_members.clear()
+        self.lbl_new_member.setText("New Member:")
+        self.btn_add.setVisible(True)
+        self.btn_confirm.setVisible(False)
 
         for member in self._team.members:
             self.list_widget_members.addItem(str(member))
