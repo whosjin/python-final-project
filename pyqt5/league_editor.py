@@ -58,8 +58,6 @@ class LeagueEditor(Ui_MainWindow, QTBaseWindow):
 
         if team_editor.exec() == QDialog.DialogCode.Accepted:
             self.update_ui()
-        else:
-            print("cancel")
 
     def update_ui(self):
         self.line_edit_team_name.clear()

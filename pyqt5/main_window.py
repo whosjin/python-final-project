@@ -55,8 +55,6 @@ class MainWindow(Ui_MainWindow, QTBaseWindow):
 
         if league_editor.exec() == QDialog.DialogCode.Accepted:
             self.update_ui()
-        else:
-            print("cancel")
 
     def update_ui(self):
         self.line_edit_league_name.clear()
