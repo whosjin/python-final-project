@@ -37,10 +37,9 @@ class TeamEditor(Ui_MainWindow, QTBaseWindow):
             self._message.warn("No Input", "You Must Enter a Valid Member Name and Email")
 
     def delete_btn_clicked(self):
-        selected_row = self.list_widget_members.currentRow()
+        selected_row = self.selected_row()
         if selected_row == -1:
-            self._message.warn("No Selection", "No Member Selected for Deletion")
-            return
+            return self._message.warn("No Selection", "No Member Selected for Deletion")
 
         dialog, btn_yes, btn_no = self._message.confirmation("Delete Member",
                                                              "Are You Sure You Want to Delete Member ("
@@ -48,13 +47,12 @@ class TeamEditor(Ui_MainWindow, QTBaseWindow):
         dialog.exec()
         if dialog.clickedButton() == btn_yes:
             del self._team.members[selected_row]
-            self.update_ui()
+        self.update_ui()
 
     def update_btn_clicked(self):
-        selected_row = self.list_widget_members.currentRow()
+        selected_row = self.selected_row()
         if selected_row == -1:
-            self._message.warn("No Selection", "No Member Selected to Update")
-            return
+            return self._message.warn("No Selection", "No Member Selected to Update")
 
         selected_member = self._team.members[selected_row]
 
@@ -81,6 +79,23 @@ class TeamEditor(Ui_MainWindow, QTBaseWindow):
 
         for member in self._team.members:
             self.list_widget_members.addItem(str(member))
+
+        selected_row = self.selected_row()
+        if selected_row != -1 and len(self._team.members) > selected_row:
+            self.list_widget_members.setCurrentItem(self.list_widget_members.item(selected_row))
+
+    def selected_row(self):
+        selection = self.list_widget_members.selectedItems()
+
+        if not selection:
+            return -1
+        assert len(selection) == 1
+        selected_row = selection[0]
+        try:
+            return [str(member) for member in self._team.members].index(selected_row.text())
+        except ValueError:
+            pass
+        return -1
 
 
 if __name__ == '__main__':

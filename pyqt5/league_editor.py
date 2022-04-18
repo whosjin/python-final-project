@@ -36,10 +36,9 @@ class LeagueEditor(Ui_MainWindow, QTBaseWindow):
             self._message.warn("No Input", "You Must Enter a Valid Team Name")
 
     def delete_btn_clicked(self):
-        selected_row = self.list_widget_teams.currentRow()
+        selected_row = self.selected_row()
         if selected_row == -1:
-            self._message.warn("No Selection", "No Team Selected for Deletion")
-            return
+            return self._message.warn("No Selection", "No Team Selected for Deletion")
 
         dialog, btn_yes, btn_no = self._message.confirmation("Delete Team",
                                                              "Are You Sure You Want to Delete Team ("
@@ -47,14 +46,12 @@ class LeagueEditor(Ui_MainWindow, QTBaseWindow):
         dialog.exec()
         if dialog.clickedButton() == btn_yes:
             del self._league.teams[selected_row]
-            self.update_ui()
+        self.update_ui()
 
     def edit_btn_clicked(self):
-        selected_row = self.list_widget_teams.currentRow()
-
+        selected_row = self.selected_row()
         if selected_row == -1:
-            self._message.warn("No Selection", "No Team Selected to Edit")
-            return
+            return self._message.warn("No Selection", "No Team Selected to Edit")
 
         team = self._league.teams[selected_row]
         team_editor = TeamEditor(team, self._db)
@@ -70,6 +67,23 @@ class LeagueEditor(Ui_MainWindow, QTBaseWindow):
 
         for team in self._league.teams:
             self.list_widget_teams.addItem(str(team))
+
+        selected_row = self.selected_row()
+        if selected_row != -1 and len(self._league.teams) > selected_row:
+            self.list_widget_teams.setCurrentItem(self.list_widget_teams.item(selected_row))
+
+    def selected_row(self):
+        selection = self.list_widget_teams.selectedItems()
+
+        if not selection:
+            return -1
+        assert len(selection) == 1
+        selected_row = selection[0]
+        try:
+            return [str(team) for team in self._league.teams].index(selected_row.text())
+        except ValueError:
+            pass
+        return -1
 
 
 if __name__ == '__main__':

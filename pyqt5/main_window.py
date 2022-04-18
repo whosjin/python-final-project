@@ -33,10 +33,9 @@ class MainWindow(Ui_MainWindow, QTBaseWindow):
             self._message.warn("No Input", "You Must Enter a Valid League Name")
 
     def delete_btn_clicked(self):
-        selected_row = self.list_widget_leagues.currentRow()
+        selected_row = self.selected_row()
         if selected_row == -1:
-            self._message.warn("No Selection", "No League Selected for Deletion")
-            return
+            return self._message.warn("No Selection", "No League Selected for Deletion")
 
         dialog, btn_yes, btn_no = self._message.confirmation("Delete League",
                                                              "Are You Sure You Want to Delete League ("
@@ -44,14 +43,12 @@ class MainWindow(Ui_MainWindow, QTBaseWindow):
         dialog.exec()
         if dialog.clickedButton() == btn_yes:
             del self._db.leagues[selected_row]
-            self.update_ui()
+        self.update_ui()
 
     def edit_btn_clicked(self):
-        selected_row = self.list_widget_leagues.currentRow()
-
+        selected_row = self.selected_row()
         if selected_row == -1:
-            self._message.warn("No Selection", "No League Selected to Edit")
-            return
+            return self._message.warn("No Selection", "No League Selected to Edit")
 
         lg = self._db.leagues[selected_row]
         league_editor = LeagueEditor(lg, self._db)
@@ -67,6 +64,23 @@ class MainWindow(Ui_MainWindow, QTBaseWindow):
 
         for lg in self._db.leagues:
             self.list_widget_leagues.addItem(str(lg))
+
+        selected_row = self.selected_row()
+        if selected_row != -1 and len(self._db.leagues) > selected_row:
+            self.list_widget_leagues.setCurrentItem(self.list_widget_leagues.item(selected_row))
+
+    def selected_row(self):
+        selection = self.list_widget_leagues.selectedItems()
+
+        if not selection:
+            return -1
+        assert len(selection) == 1
+        selected_row = selection[0]
+        try:
+            return [str(league) for league in self._db.leagues].index(selected_row.text())
+        except ValueError:
+            pass
+        return -1
 
 
 if __name__ == '__main__':
