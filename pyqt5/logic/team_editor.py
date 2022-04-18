@@ -4,9 +4,9 @@ from PyQt5 import uic, QtWidgets
 
 from league_manager.exceptions import DuplicateOid, DuplicateEmail
 from league_manager.team_member import TeamMember
-from pyqt5.messages import Message
+from pyqt5.logic.messages import Message
 
-Ui_MainWindow, QTBaseWindow = uic.loadUiType("team_editor.ui")
+Ui_MainWindow, QTBaseWindow = uic.loadUiType("ui/team_editor.ui")
 
 
 class TeamEditor(Ui_MainWindow, QTBaseWindow):
