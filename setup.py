@@ -3,7 +3,7 @@ from setuptools import setup
 setup(
     name='Final Project',
     version='1.1',
-    packages=['pyqt5', 'league_manager'],
+    packages=['pyqt5', 'pyqt5.ui', 'pyqt5.logic', 'league_manager'],
     url='',
     license='',
     author='Jin Hu',
