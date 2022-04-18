@@ -35,7 +35,18 @@ class TeamEditor(Ui_MainWindow, QTBaseWindow):
             self._message.warn("No Input", "You Must Enter a Valid Member Name and Email")
 
     def delete_btn_clicked(self):
-        pass
+        selected_row = self.list_widget_members.currentRow()
+        if selected_row == -1:
+            self._message.warn("No Selection", "No Member Selected for Deletion")
+            return
+
+        dialog, btn_yes, btn_no = self._message.confirmation("Delete Member",
+                                                             "Are You Sure You Want to Delete Member ("
+                                                             + str(self._team.members[selected_row]) + ")?")
+        dialog.exec()
+        if dialog.clickedButton() == btn_yes:
+            del self._team.members[selected_row]
+            self.update_ui()
 
     def update_ui(self):
         self.line_edit_member_name.clear()

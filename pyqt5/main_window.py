@@ -38,7 +38,7 @@ class MainWindow(Ui_MainWindow, QTBaseWindow):
             self._message.warn("No Selection", "No League Selected for Deletion")
             return
 
-        dialog, btn_yes, btn_no = self._message.confirmation("Delete Team",
+        dialog, btn_yes, btn_no = self._message.confirmation("Delete League",
                                                              "Are You Sure You Want to Delete League ("
                                                              + str(self._db.leagues[selected_row]) + ")?")
         dialog.exec()
