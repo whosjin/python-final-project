@@ -13,7 +13,7 @@ class TeamEditor(Ui_MainWindow, QTBaseWindow):
         super().__init__(parent)
         self.setupUi(self)
         self.btn_add.clicked.connect(self.add_btn_clicked)
-        # self.btn_delete.clicked.connect(self.delete_btn_clicked)
+        self.btn_delete.clicked.connect(self.delete_btn_clicked)
         # self.btn_edit.clicked.connect(self.edit_btn_clicked)
         self._message = Message()
         self._team = team
@@ -30,10 +30,12 @@ class TeamEditor(Ui_MainWindow, QTBaseWindow):
 
         if new_member_name and new_member_email:
             self._team.add_member(TeamMember(oid, new_member_name, new_member_email))
+            self.update_ui()
         else:
             self._message.warn("No Input", "You Must Enter a Valid Member Name and Email")
 
-        self.update_ui()
+    def delete_btn_clicked(self):
+        pass
 
     def update_ui(self):
         self.line_edit_member_name.clear()

@@ -31,27 +31,23 @@ class LeagueEditor(Ui_MainWindow, QTBaseWindow):
 
         if new_team_name:
             self._league.add_team(Team(oid, new_team_name))
+            self.update_ui()
         else:
             self._message.warn("No Input", "You Must Enter a Valid Team Name")
 
-        self.update_ui()
-
     def delete_btn_clicked(self):
         selected_row = self.list_widget_teams.currentRow()
-        dialog, btn_yes, btn_no = self._message.confirmation("Delete Team",
-                                                             "Are You Sure You Want to Delete Team ("
-                                                             + str(self._league.teams[selected_row]) + ")?")
-
         if selected_row == -1:
             self._message.warn("No Selection", "No Team Selected for Deletion")
             return
 
+        dialog, btn_yes, btn_no = self._message.confirmation("Delete Team",
+                                                             "Are You Sure You Want to Delete Team ("
+                                                             + str(self._league.teams[selected_row]) + ")?")
         dialog.exec()
-
         if dialog.clickedButton() == btn_yes:
             del self._league.teams[selected_row]
-
-        self.update_ui()
+            self.update_ui()
 
     def edit_btn_clicked(self):
         selected_row = self.list_widget_teams.currentRow()

@@ -28,27 +28,23 @@ class MainWindow(Ui_MainWindow, QTBaseWindow):
 
         if new_league_name:
             self._db.add_league(League(oid, new_league_name))
+            self.update_ui()
         else:
             self._message.warn("No Input", "You Must Enter a Valid League Name")
 
-        self.update_ui()
-
     def delete_btn_clicked(self):
         selected_row = self.list_widget_leagues.currentRow()
-        dialog, btn_yes, btn_no = self._message.confirmation("Delete Team",
-                                                             "Are You Sure You Want to Delete League ("
-                                                             + str(self._db.leagues[selected_row]) + ")?")
-
         if selected_row == -1:
             self._message.warn("No Selection", "No League Selected for Deletion")
             return
 
+        dialog, btn_yes, btn_no = self._message.confirmation("Delete Team",
+                                                             "Are You Sure You Want to Delete League ("
+                                                             + str(self._db.leagues[selected_row]) + ")?")
         dialog.exec()
-
         if dialog.clickedButton() == btn_yes:
             del self._db.leagues[selected_row]
-
-        self.update_ui()
+            self.update_ui()
 
     def edit_btn_clicked(self):
         selected_row = self.list_widget_leagues.currentRow()
