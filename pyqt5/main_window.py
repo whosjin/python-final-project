@@ -20,6 +20,7 @@ class MainWindow(Ui_MainWindow, QTBaseWindow):
         self.btn_edit.clicked.connect(self.edit_btn_clicked)
         self.action_load.triggered.connect(self.action_load_clicked)
         self.action_save.triggered.connect(self.action_save_clicked)
+        self.action_quit.triggered.connect(self.action_quit_clicked)
         self._db = LeagueDatabase.instance()
         self._message = Message()
         self.update_ui()
@@ -83,14 +84,25 @@ class MainWindow(Ui_MainWindow, QTBaseWindow):
         return -1
 
     def action_load_clicked(self):
-        file = QFileDialog.getOpenFileName(self, "Open League File", "", "Any files (*)")
-        self._db.load(file[0])
-        self._db = LeagueDatabase.instance()
-        self.update_ui()
+        try:
+            file = QFileDialog.getOpenFileName(self, "Open League File", "", "Any files (*)")
+            self._db.load(file[0])
+            self._db = LeagueDatabase.instance()
+            self.update_ui()
+        except FileNotFoundError:
+            self._message.warn("Error", "File Not Found")
+        except:
+            self._message.warn("Error", "Issue Loading League Instance")
 
     def action_save_clicked(self):
-        file = QFileDialog.getSaveFileName(self, "Save File")
-        self._db.save(file[0])
+        try:
+            file = QFileDialog.getSaveFileName(self, "Save File")
+            self._db.save(file[0])
+        except:
+            self._message.warn("Error", "Issue Exporting League Instance")
+
+    def action_quit_clicked(self):
+        QtWidgets.QApplication.quit()
 
 
 if __name__ == '__main__':
