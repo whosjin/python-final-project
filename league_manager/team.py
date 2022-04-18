@@ -26,7 +26,7 @@ class Team(IdentifiedObject):
             raise DuplicateOid("Duplicate OID", member.oid)
 
         for mem in self._members:
-            if member.email == mem.email:
+            if member.email.lower() == mem.email.lower():
                 raise DuplicateEmail("Duplicate Email", member.email)
 
         if member not in self._members and member is not None:
