@@ -349,8 +349,14 @@
      <x>0</x>
      <y>0</y>
      <width>829</width>
-     <height>21</height>
+     <height>24</height>
     </rect>
+   </property>
+   <property name="defaultUp">
+    <bool>false</bool>
+   </property>
+   <property name="nativeMenuBar">
+    <bool>false</bool>
    </property>
    <widget class="QMenu" name="menuFile">
     <property name="title">
@@ -359,7 +365,7 @@
     <addaction name="action_load"/>
     <addaction name="action_save"/>
     <addaction name="separator"/>
-    <addaction name="actionQuit"/>
+    <addaction name="action_quit"/>
    </widget>
    <addaction name="menuFile"/>
   </widget>
@@ -374,7 +380,7 @@
     <string>&amp;Save</string>
    </property>
   </action>
-  <action name="actionQuit">
+  <action name="action_quit">
    <property name="text">
     <string>&amp;Quit</string>
    </property>

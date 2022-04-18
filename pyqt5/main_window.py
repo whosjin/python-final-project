@@ -1,10 +1,10 @@
 import sys
 
 from PyQt5 import uic, QtWidgets
-from PyQt5.QtWidgets import QMessageBox, QDialog
+from PyQt5.QtWidgets import QDialog, QFileDialog
 
-from league_manager.league_database import LeagueDatabase
 from league_manager.league import League
+from league_manager.league_database import LeagueDatabase
 from pyqt5.league_editor import LeagueEditor
 from pyqt5.messages import Message
 
@@ -18,6 +18,8 @@ class MainWindow(Ui_MainWindow, QTBaseWindow):
         self.btn_add.clicked.connect(self.add_btn_clicked)
         self.btn_delete.clicked.connect(self.delete_btn_clicked)
         self.btn_edit.clicked.connect(self.edit_btn_clicked)
+        self.action_load.triggered.connect(self.action_load_clicked)
+        self.action_save.triggered.connect(self.action_save_clicked)
         self._db = LeagueDatabase.instance()
         self._message = Message()
         self.update_ui()
@@ -79,6 +81,17 @@ class MainWindow(Ui_MainWindow, QTBaseWindow):
         except ValueError:
             pass
         return -1
+
+    def action_load_clicked(self):
+        file = QFileDialog.getOpenFileName(self, "Open League File", "", "Any files (*)")
+        self._db.load(file[0])
+        self._db = LeagueDatabase.instance()
+        self.update_ui()
+
+    def action_save_clicked(self):
+        file = QFileDialog.getSaveFileName(self, "Save File")
+        self._db.save(file[0])
+        self.update_ui()
 
 
 if __name__ == '__main__':
