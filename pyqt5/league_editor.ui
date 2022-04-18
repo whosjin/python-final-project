@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>828</width>
+    <width>787</width>
     <height>572</height>
    </rect>
   </property>
@@ -359,6 +359,14 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>line_edit_team_name</tabstop>
+  <tabstop>btn_add</tabstop>
+  <tabstop>btn_edit</tabstop>
+  <tabstop>btn_delete</tabstop>
+  <tabstop>buttonBox</tabstop>
+  <tabstop>list_widget_teams</tabstop>
+ </tabstops>
  <resources/>
  <connections>
   <connection>

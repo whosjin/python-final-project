@@ -32,7 +32,7 @@ class LeagueEditor(Ui_MainWindow, QTBaseWindow):
         if new_team_name:
             self._league.add_team(Team(oid, new_team_name))
         else:
-            self._message.warn("No Input", "You must enter a valid Team Name")
+            self._message.warn("No Input", "You Must Enter a Valid Team Name")
 
         self.update_ui()
 

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>844</width>
-    <height>627</height>
+    <height>653</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,24 +19,24 @@
      <property name="fieldGrowthPolicy">
       <enum>QFormLayout::ExpandingFieldsGrow</enum>
      </property>
-     <item row="0" column="0">
-      <widget class="QLabel" name="lbl_add_member">
+     <item row="2" column="0">
+      <widget class="QLabel" name="lbl_name">
        <property name="text">
-        <string>Member Name:</string>
+        <string>Name:</string>
        </property>
        <property name="buddy">
         <cstring>line_edit_member_name</cstring>
        </property>
       </widget>
      </item>
-     <item row="0" column="1">
+     <item row="2" column="1">
       <widget class="QLineEdit" name="line_edit_member_name">
        <property name="focusPolicy">
         <enum>Qt::StrongFocus</enum>
        </property>
       </widget>
      </item>
-     <item row="1" column="0" colspan="2">
+     <item row="4" column="0" colspan="2">
       <layout class="QHBoxLayout" name="horizontalLayout_2">
        <item>
         <spacer name="horizontalSpacer">
@@ -62,6 +62,33 @@
         </widget>
        </item>
       </layout>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="lbl_email">
+       <property name="text">
+        <string>Email:</string>
+       </property>
+       <property name="buddy">
+        <cstring>line_edit_member_email</cstring>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="lbl_new_member">
+       <property name="text">
+        <string>New Member:</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignJustify|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QLineEdit" name="line_edit_member_email">
+       <property name="focusPolicy">
+        <enum>Qt::StrongFocus</enum>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>
@@ -356,6 +383,14 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>line_edit_member_name</tabstop>
+  <tabstop>line_edit_member_email</tabstop>
+  <tabstop>btn_add</tabstop>
+  <tabstop>btn_edit</tabstop>
+  <tabstop>btn_delete</tabstop>
+  <tabstop>list_widget_members</tabstop>
+ </tabstops>
  <resources/>
  <connections>
   <connection>

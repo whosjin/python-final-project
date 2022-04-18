@@ -29,7 +29,7 @@ class MainWindow(Ui_MainWindow, QTBaseWindow):
         if new_league_name:
             self._db.add_league(League(oid, new_league_name))
         else:
-            self._message.warn("No Input", "You must enter a valid League Name")
+            self._message.warn("No Input", "You Must Enter a Valid League Name")
 
         self.update_ui()
 
