@@ -1,8 +1,9 @@
 import sys
 
 from PyQt5 import uic, QtWidgets
-from PyQt5.QtWidgets import QDialog
+from PyQt5.QtWidgets import QDialog, QFileDialog
 
+from league_manager.exceptions import NoDataInFile
 from league_manager.team import Team
 from pyqt5.messages import Message
 from pyqt5.team_editor import TeamEditor
@@ -17,10 +18,11 @@ class LeagueEditor(Ui_MainWindow, QTBaseWindow):
         self.btn_add.clicked.connect(self.add_btn_clicked)
         self.btn_delete.clicked.connect(self.delete_btn_clicked)
         self.btn_edit.clicked.connect(self.edit_btn_clicked)
+        self.btn_import.clicked.connect(self.import_btn_clicked)
+        self.btn_export.clicked.connect(self.export_btn_clicked)
         self._message = Message()
         self._league = league
         self._db = db
-        self.layout().setMenuBar()
         if self._league:
             self.lbl_teams.setText("Teams in " + league.name + ":")
             self.setWindowTitle("League (" + league.name + ") Editor")
@@ -59,6 +61,25 @@ class LeagueEditor(Ui_MainWindow, QTBaseWindow):
 
         if team_editor.exec() == QDialog.DialogCode.Accepted:
             self.update_ui()
+
+    def import_btn_clicked(self):
+        try:
+            file = QFileDialog.getOpenFileName(self, "Open File", "", "CSV files (*.csv)")
+            self._db.import_league_teams(self._league, file[0])
+            self.update_ui()
+        except FileNotFoundError:
+            self._message.warn("Error", "File Not Found")
+        except NoDataInFile:
+            self._message.warn("Error", "No Data in File")
+        except:
+            self._message.warn("Error", "Issue Loading File")
+
+    def export_btn_clicked(self):
+        try:
+            file = QFileDialog.getSaveFileName(self, "Save File", "", "CSV files (*.csv)")
+            self._db.export_league_teams(self._league, file[0])
+        except:
+            self._message.warn("Error", "Issue Exporting File")
 
     def update_ui(self):
         self.line_edit_team_name.clear()

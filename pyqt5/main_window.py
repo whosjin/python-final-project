@@ -91,7 +91,6 @@ class MainWindow(Ui_MainWindow, QTBaseWindow):
     def action_save_clicked(self):
         file = QFileDialog.getSaveFileName(self, "Save File")
         self._db.save(file[0])
-        self.update_ui()
 
 
 if __name__ == '__main__':

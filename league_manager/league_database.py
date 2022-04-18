@@ -2,6 +2,7 @@ import csv
 import os.path
 import pickle
 
+from league_manager.exceptions import NoDataInFile
 from league_manager.team import Team
 from league_manager.team_member import TeamMember
 
@@ -70,6 +71,11 @@ class LeagueDatabase:
 
         try:
             with open(file_name, mode="r", encoding="utf-8") as csv_file:
+                file_size = os.path.getsize(file_name)
+
+                if file_size == 0:
+                    raise NoDataInFile("No Data in File")
+
                 csv_reader = csv.reader(csv_file, delimiter=',')
                 header = next(csv_reader)
                 for row in csv_reader:
