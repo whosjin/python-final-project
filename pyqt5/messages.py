@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QMessageBox, QDialog
+from PyQt5.QtWidgets import QMessageBox
 
 
 class Message:

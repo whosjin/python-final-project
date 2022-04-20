@@ -20,10 +20,5 @@ setup(
         "pyqt5-tools=5.15.4",
         "keyring=23.5.0"
     },
-    python_requires='>=3.9',
-    entry_points={
-        "console_scripts": [
-            "league_manager = pyqt5.logic.main_window:main"
-        ]
-    },
+    python_requires='>=3.9'
 )
