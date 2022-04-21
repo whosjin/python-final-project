@@ -1,10 +1,10 @@
 from PyQt5 import uic
 
 from .messages import Message
-from ...league_manager.exceptions import DuplicateOid, DuplicateEmail
-from ...league_manager.team_member import TeamMember
+from ...league.exceptions import DuplicateOid, DuplicateEmail
+from ...league.team_member import TeamMember
 
-Ui_MainWindow, QTBaseWindow = uic.loadUiType("src/pyqt5/ui/team_editor.ui")
+Ui_MainWindow, QTBaseWindow = uic.loadUiType("league_manager/pyqt5/ui/team_editor.ui")
 
 
 class TeamEditor(Ui_MainWindow, QTBaseWindow):

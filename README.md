@@ -6,9 +6,9 @@ League Manager allows the user to create leagues, which contains teams, and team
 
 ## How To
 ### Start
-Go to the pyqt5 directory and enter:
+Go to the Final Project directory and enter:
 ```
-python3 main_window.py
+python -m league_manager.pyqt5.logic.main_window
 ```
 This should open the Main Window of the application. 
 

@@ -3,10 +3,10 @@ from PyQt5.QtWidgets import QDialog, QFileDialog
 
 from .messages import Message
 from .team_editor import TeamEditor
-from ...league_manager.exceptions import DuplicateOid, NoDataInFile
-from ...league_manager.team import Team
+from ...league.exceptions import DuplicateOid, NoDataInFile
+from ...league.team import Team
 
-Ui_MainWindow, QTBaseWindow = uic.loadUiType("src/pyqt5/ui/league_editor.ui")
+Ui_MainWindow, QTBaseWindow = uic.loadUiType("league_manager/pyqt5/ui/league_editor.ui")
 
 
 class LeagueEditor(Ui_MainWindow, QTBaseWindow):
