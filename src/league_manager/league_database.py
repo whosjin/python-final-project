@@ -2,9 +2,9 @@ import csv
 import os.path
 import pickle
 
-from league_manager.exceptions import NoDataInFile
-from league_manager.team import Team
-from league_manager.team_member import TeamMember
+from src.league_manager.exceptions import NoDataInFile
+from src.league_manager.team import Team
+from src.league_manager.team_member import TeamMember
 
 
 class LeagueDatabase:

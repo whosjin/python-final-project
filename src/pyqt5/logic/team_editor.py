@@ -1,12 +1,10 @@
-import sys
+from PyQt5 import uic
 
-from PyQt5 import uic, QtWidgets
+from .messages import Message
+from ...league_manager.exceptions import DuplicateOid, DuplicateEmail
+from ...league_manager.team_member import TeamMember
 
-from league_manager.exceptions import DuplicateOid, DuplicateEmail
-from league_manager.team_member import TeamMember
-from pyqt5.messages import Message
-
-Ui_MainWindow, QTBaseWindow = uic.loadUiType("team_editor.ui")
+Ui_MainWindow, QTBaseWindow = uic.loadUiType("src/pyqt5/ui/team_editor.ui")
 
 
 class TeamEditor(Ui_MainWindow, QTBaseWindow):
@@ -103,9 +101,8 @@ class TeamEditor(Ui_MainWindow, QTBaseWindow):
             pass
         return -1
 
-
-if __name__ == '__main__':
-    app = QtWidgets.QApplication(sys.argv)
-    window = TeamEditor()
-    window.show()
-    sys.exit(app.exec_())
+# if __name__ == '__main__':
+#     app = QtWidgets.QApplication(sys.argv)
+#     window = TeamEditor()
+#     window.show()
+#     sys.exit(app.exec_())

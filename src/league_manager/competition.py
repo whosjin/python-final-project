@@ -1,4 +1,4 @@
-from league_manager.identified_object import IdentifiedObject
+from src.league_manager.identified_object import IdentifiedObject
 
 
 class Competition(IdentifiedObject):

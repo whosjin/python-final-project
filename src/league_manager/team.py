@@ -1,5 +1,5 @@
-from league_manager.exceptions import DuplicateOid, DuplicateEmail
-from league_manager.identified_object import IdentifiedObject
+from src.league_manager.exceptions import DuplicateOid, DuplicateEmail
+from src.league_manager.identified_object import IdentifiedObject
 
 
 class Team(IdentifiedObject):

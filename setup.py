@@ -17,7 +17,6 @@ setup(
         "PyQt5==5.15.6",
         "setuptools==62.1.0",
         "yagmail~=0.15.277",
-        "pyqt5-tools=5.15.4",
         "keyring=23.5.0"
     },
     python_requires='>=3.9'

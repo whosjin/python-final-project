@@ -3,12 +3,12 @@ import sys
 from PyQt5 import uic, QtWidgets
 from PyQt5.QtWidgets import QDialog, QFileDialog
 
-from league_manager.league import League
-from league_manager.league_database import LeagueDatabase
-from pyqt5.league_editor import LeagueEditor
-from pyqt5.messages import Message
+from .league_editor import LeagueEditor
+from .messages import Message
+from ...league_manager.league import League
+from ...league_manager.league_database import LeagueDatabase
 
-Ui_MainWindow, QTBaseWindow = uic.loadUiType("main_window.ui")
+Ui_MainWindow, QTBaseWindow = uic.loadUiType("src/pyqt5/ui/main_window.ui")
 
 
 class MainWindow(Ui_MainWindow, QTBaseWindow):
